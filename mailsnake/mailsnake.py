@@ -20,8 +20,10 @@ class MailSnake(object):
             dc = self.apikey.split('-')[1]
         self.base_api_url = 'https://%s.api.mailchimp.com/1.3/?method=' % dc
 
-    def call(self, method, params):
-        return json.loads(requests.post(self.base_api_url + method, params).content)
+    def call(self, method, params):        
+        post_data = json.dumps(params)
+        response = requests.post(self.base_api_url + method, post_data).content
+        return json.loads(response)
 
     def __getattr__(self, method_name):
 
