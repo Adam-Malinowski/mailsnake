@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 from setuptools import setup, find_packages
 
-import mailsnake
-
 CLASSIFIERS = [
     'Development Status :: 5 - Production/Stable',
     'Intended Audience :: Developers',
@@ -13,14 +11,13 @@ CLASSIFIERS = [
     'Topic :: Software Development :: Libraries :: Python Modules'
 ]
 
-KEYWORDS = 'mailchimp api wrapper 1.3'
-
+KEYWORDS = 'mailchimp api wrapper 1.4'
 
 setup(
     name = 'mailsnake',
-    version = mailsnake.__version__,
-    description = """MailChimp API v1.3 wrapper for Python.""",
-    author = mailsnake.__author__,
+    version = '1.4.1.0',
+    description = """MailChimp API v1.4 wrapper for Python.""",
+    author = 'John-Kim Murphy',
     url = "https://github.com/leftium/mailsnake",
     packages = find_packages(),
     download_url = "http://pypi.python.org/pypi/mailsnake/",
