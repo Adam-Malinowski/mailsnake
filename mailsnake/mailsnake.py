@@ -1,3 +1,4 @@
+import urllib2 
 import requests
 try:
     import simplejson as json
@@ -21,7 +22,7 @@ class MailSnake(object):
         self.base_api_url = 'https://%s.api.mailchimp.com/1.3/?method=' % dc
 
     def call(self, method, params):        
-        post_data = json.dumps(params)
+        post_data = urllib2.quote(json.dumps(params))
         response = requests.post(self.base_api_url + method, post_data).content
         return json.loads(response)
 
