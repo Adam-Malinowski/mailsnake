@@ -15,7 +15,7 @@ KEYWORDS = 'mailchimp api wrapper 1.4'
 
 setup(
     name = 'mailsnake',
-    version = '1.4.1.0',
+    version = '1.4.2.0',
     description = """MailChimp API v1.4 wrapper for Python.""",
     author = 'John-Kim Murphy',
     url = "https://github.com/leftium/mailsnake",
