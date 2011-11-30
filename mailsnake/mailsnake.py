@@ -5,7 +5,7 @@ except ImportError:
     import json
 
 class MailSnake(object):
-    def __init__(self, apikey='', extra_params={}, api='standard'):
+    def __init__(self, apikey='', extra_params={}, api='standard', timeout=60):
         """ Cache API key, url and extra params
         
         """
@@ -13,6 +13,7 @@ class MailSnake(object):
         self.default_params = {'apikey': apikey}
         self.default_params.update(extra_params)
         self.api = api
+        self.timeout = timeout
         self.dc = 'us1' if '-' not in self.apikey else self.apikey.split('-')[1]
         if self.api == 'export':
             # export api has method as url, not as GET param
@@ -41,12 +42,13 @@ class MailSnake(object):
             api_url += '/'
             # note, export api does not accept POST, even though it claims it does
             get_params = '&'.join('%s=%s' % (k,v) for k,v in params.items())
-            response = requests.get(api_url + '?' + get_params)
+            response = requests.get(api_url + '?' + get_params)            
             return response.content  # raw data to be unpacked
         else:
             headers = {'content-type': 'application/json'}
             post_data = json.dumps(params)
-            response = requests.post(api_url, data=post_data, headers=headers)
+            response = requests.post(api_url, data=post_data, headers=headers,
+                                     timeout=self.timeout)
             return json.loads(response.content)
 
     def __getattr__(self, method_name):
