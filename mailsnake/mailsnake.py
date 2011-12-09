@@ -1,3 +1,4 @@
+import urllib2 
 import requests
 try:
     import simplejson as json
@@ -46,7 +47,7 @@ class MailSnake(object):
             return response.content  # raw data to be unpacked
         else:
             headers = {'content-type': 'application/json'}
-            post_data = json.dumps(params)
+            post_data = urllib2.quote(json.dumps(params))
             response = requests.post(api_url, data=post_data, headers=headers,
                                      timeout=self.timeout)
             return json.loads(response.content)
